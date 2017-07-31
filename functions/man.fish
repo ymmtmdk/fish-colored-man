@@ -19,5 +19,9 @@ function man --description 'Format and display manual pages'
 
     set -lx GROFF_NO_SGR yes # fedora
 
-    command man $argv
+    if command man -w -M $__fish_datadir/man $argv > /dev/null ^ /dev/null
+        command man -M $__fish_datadir/man $argv
+    else
+        command man $argv
+    end
 end
